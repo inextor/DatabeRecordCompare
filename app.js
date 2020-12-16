@@ -90,7 +90,6 @@ else
         while(counter1< db1Tables.length || counter2< db2Tables.length )
         {
 
-
             if( counter1< db1Tables.length && counter2 < db2Tables.length )
             {
                 let result = db1Tables[ counter1].localeCompare( db2Tables[ counter2 ] )
@@ -134,16 +133,20 @@ else
         });
         return resolveAll({tableNames: Promise.resolve(tableNames ), value: Promise.all(promises)});
     }).then((responses)=>{
+		//console.log(responses);
+
         responses.tableNames.forEach((tableName,index)=>{
             //console.log( tableName, index );
-            if( responses.value[index][0] == responses.value[index][1])
+			//console.log( index );
+			//console.log( tableName, responses.value[index], responses.value[index].length );
+
+            if( responses.value[index][0] != responses.value[index][1])
             {
-                console.log(tableName);
+                console.log(tableName+' no son iguales', responses.value[index][0], responses.value[index][1]  );
             }
-            else{
-                console.log( tableName, responses.value[index] );
-            }
-            //console.log(tableName, responses.values[index][0], responses.values[index][1]);
+            //else{
+            //    console.log( tableName, 'Same' );
+            //}
         });
         return Promise.resolve();
     }).then(()=>{
